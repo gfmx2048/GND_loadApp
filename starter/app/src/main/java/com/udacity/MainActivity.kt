@@ -51,8 +51,7 @@ class MainActivity : AppCompatActivity() {
                 .setAllowedOverRoaming(true)
 
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        downloadID =
-            downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+        downloadID = downloadManager.enqueue(request)// enqueue puts the download request in the queue.
     }
 
     companion object {
