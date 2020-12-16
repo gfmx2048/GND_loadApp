@@ -1,83 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
-        android:id="@+id/fl_main_container"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="0dp"
-        android:layout_height="220dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MainActivity"
+        tools:showIn="@layout/activity_main">
 
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_assistant_black_24dp"/>
+        <FrameLayout
+            android:id="@+id/fl_main_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="0dp"
+            android:layout_height="220dp">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_assistant_black_24dp"
+                tools:ignore="ContentDescription" />
 
-    <RadioGroup
-        android:id="@+id/rg_main"
-        android:layout_width="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/fl_main_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content">
+        </FrameLayout>
 
-        <RadioButton
-            android:checked="true"
-            android:id="@+id/rb_glide"
-            android:text="@string/glide_url"
-            android:textSize="@dimen/default_text_size"
-            android:padding="@dimen/radio_buttons_padding"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <RadioGroup
+            android:id="@+id/rg_main"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/fl_main_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rb_project"
-            android:padding="@dimen/radio_buttons_padding"
-            android:text="@string/starter_project_url"
-            android:textSize="@dimen/default_text_size"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_glide"
+                android:text="@string/glide_url"
+                android:textSize="@dimen/default_text_size"
+                android:padding="@dimen/radio_buttons_padding"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <RadioButton
-            android:id="@+id/rb_retrofit"
-            android:textSize="@dimen/default_text_size"
-            android:text="@string/retrofit_url"
-            android:padding="@dimen/radio_buttons_padding"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_project"
+                android:padding="@dimen/radio_buttons_padding"
+                android:text="@string/starter_project_url"
+                android:textSize="@dimen/default_text_size"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_retrofit"
+                android:textSize="@dimen/default_text_size"
+                android:text="@string/retrofit_url"
+                android:padding="@dimen/radio_buttons_padding"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <com.udacity.LoadingButton
-        android:id="@+id/custom_button"
-        android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        app:rect_backgroundColor="@color/colorPrimary"
-        app:rect_foregroundColor="@color/colorPrimaryDark"
-        app:circleColor="@color/colorAccent"
-        app:labelColor="@color/white"
-        app:label="@string/button_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toBottomOf="@+id/rg_main" />
+        </RadioGroup>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.udacity.LoadingButton
+            android:id="@+id/custom_button"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:rect_backgroundColor="@color/colorPrimary"
+            app:rect_foregroundColor="@color/colorPrimaryDark"
+            app:circleColor="@color/colorAccent"
+            app:labelColor="@color/white"
+            app:label="@string/button_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            app:layout_constraintTop_toBottomOf="@+id/rg_main" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
