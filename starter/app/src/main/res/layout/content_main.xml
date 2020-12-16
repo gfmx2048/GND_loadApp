@@ -74,9 +74,10 @@
         app:rect_backgroundColor="@color/colorPrimary"
         app:rect_foregroundColor="@color/colorPrimaryDark"
         app:circleColor="@color/colorAccent"
-        app:labelColor="@color/colorBlack"
+        app:labelColor="@color/white"
         app:label="@string/button_name"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.9"
         app:layout_constraintTop_toBottomOf="@+id/rg_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
