@@ -46,7 +46,7 @@ class LoadingButton @JvmOverloads constructor(
     private var showCircle = true
 
     private var valueAnimator = ValueAnimator.ofInt(0, endAngleOfCircle).apply {
-        duration = 1000
+        duration = 5000
         interpolator = LinearInterpolator()
         repeatMode = ValueAnimator.REVERSE
         addUpdateListener {
@@ -71,6 +71,7 @@ class LoadingButton @JvmOverloads constructor(
                 label = context.getString(R.string.download)
                 showCircle = false
                 valueAnimator.cancel()
+                invalidate()
             }
             ButtonState.Loading -> {
                 label = context.getString(R.string.button_loading)

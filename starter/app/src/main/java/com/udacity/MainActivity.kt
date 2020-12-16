@@ -15,7 +15,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.udacity.databinding.ActivityMainBinding
-import com.udacity.receivers.DownloadsReceiver
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,22 +30,32 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
     private lateinit var action: NotificationCompat.Action
-    private val receiver = DownloadsReceiver()
+
+    private lateinit var mBinding: ActivityMainBinding
+
+    private val receiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context, intent: Intent?) {
+            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) as NotificationManager
+            notificationManager.sendNotification("Download complete $id", context)
+            mBinding.content.customButton.setState(ButtonState.Completed)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        val toolbar = binding.toolbar
+        mBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val toolbar = mBinding.toolbar
         setSupportActionBar(toolbar)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        binding.content.customButton.setOnClickListener {
-            val checkedRb = binding.content.rgMain.checkedRadioButtonId
+        mBinding.content.customButton.setOnClickListener {
+            val checkedRb = mBinding.content.rgMain.checkedRadioButtonId
             if (checkedRb != -1) {
                 download(when(checkedRb){
-                    binding.content.rbRetrofit.id -> URL_RETFORI
-                    binding.content.rbGlide.id -> URL_GIDE
+                    mBinding.content.rbRetrofit.id -> URL_RETFORI
+                    mBinding.content.rbGlide.id -> URL_GIDE
                     else -> URL_PROJECT
                 })
             } else {
