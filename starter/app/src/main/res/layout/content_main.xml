@@ -71,6 +71,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
+        app:rect_backgroundColor="@color/colorPrimary"
+        app:rect_foregroundColor="@color/colorPrimaryDark"
+        app:circleColor="@color/colorAccent"
+        app:labelColor="@color/colorBlack"
+        app:label="@string/button_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rg_main" />
 
