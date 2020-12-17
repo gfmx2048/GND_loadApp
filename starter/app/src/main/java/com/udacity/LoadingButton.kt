@@ -12,6 +12,7 @@ import android.view.animation.LinearInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
+import timber.log.Timber
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -50,22 +51,21 @@ class LoadingButton @JvmOverloads constructor(
         interpolator = LinearInterpolator()
         repeatMode = ValueAnimator.REVERSE
         addUpdateListener {
+            //angle will increase from 0 to 360
             currentSweepAngle = this.animatedValue as Int
+
+            //width of the foreground rectangle will be increase also
             targetWidth = widthSize.times(this.animatedValue as Int).div(360).toFloat()
-            if (targetWidth > widthSize)
-                targetWidth = widthSize.toFloat()
+
             invalidate()
         }
     }
 
-    private var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
+    private var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, old, new ->
+        Timber.d("old status $old and new $new")
         when (new) {
             ButtonState.Clicked -> {
-                label = context.getString(R.string.button_loading)
-                paint.measureText(label)
-                showCircle = true
-                valueAnimator.cancel()
-                valueAnimator.start()
+               setState(ButtonState.Loading)
             }
             ButtonState.Completed -> {
                 label = context.getString(R.string.download)
@@ -75,13 +75,10 @@ class LoadingButton @JvmOverloads constructor(
             }
             ButtonState.Loading -> {
                 label = context.getString(R.string.button_loading)
+                paint.measureText(label)
                 showCircle = true
-                valueAnimator.resume()
-            }
-            else -> {
-                label = context.getString(R.string.paused)
-                showCircle = true
-                valueAnimator.pause()
+                valueAnimator.cancel()
+                valueAnimator.start()
             }
         }
     }
@@ -123,6 +120,10 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     override fun performClick(): Boolean {
+        if(buttonState == ButtonState.Loading) {
+            Timber.d("Button is loading, let the animation finish to handle the click")
+            return true
+        }
         super.performClick()
         setState(ButtonState.Clicked)
         return true
@@ -135,13 +136,11 @@ class LoadingButton @JvmOverloads constructor(
         paint.color = rectBackgroundColor
         canvas?.drawRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), paint)
 
-        //Draw arc ready for animation
+        //Draw arc and foreground rect ready for animation
         if (showCircle) {
 
-            //Draw button foreground
             paint.color = rectForegroundColor
             canvas?.drawRect(0f, 0f, targetWidth, heightSize.toFloat(), paint)
-
 
             paint.color = circeColor
             canvas?.drawArc(
@@ -190,6 +189,10 @@ class LoadingButton @JvmOverloads constructor(
 
     fun setState(state: ButtonState) {
         buttonState = state
+    }
+
+    fun updateProgress(progress: Int){
+        Timber.d("Progress $progress")
     }
 
 }

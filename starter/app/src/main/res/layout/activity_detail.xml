@@ -23,7 +23,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include
-            android:id="@+id/content_detail"
+            android:id="@+id/content"
             layout="@layout/content_detail" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
