@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             return
         }else{
             val request = DownloadManager.Request(Uri.parse(url))
-                .setTitle(getString(R.string.app_name))
+                .setTitle(url)
                 .setDescription(getString(R.string.app_description))
                 .setRequiresCharging(false)
                 .setAllowedOverMetered(true)

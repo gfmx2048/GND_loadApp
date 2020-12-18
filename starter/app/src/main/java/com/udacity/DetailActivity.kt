@@ -20,10 +20,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView<ActivityDetailBinding>(
-            this,
-            R.layout.activity_detail
-        )
+        mBinding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
         val toolbar = mBinding.toolbar
         setSupportActionBar(toolbar)
         mDownloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
@@ -34,10 +31,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun cancelNotification(downloadId: Long) {
-        val notificationManager = ContextCompat.getSystemService(
-            this,
-            NotificationManager::class.java
-        ) as NotificationManager
+        val notificationManager = ContextCompat.getSystemService(this, NotificationManager::class.java) as NotificationManager
         if(downloadId!=-1L){
             notificationManager.cancel(downloadId.toInt())
         }else{
@@ -73,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    fun statusOfDownloadManager(downloadId: Long){
+    private fun statusOfDownloadManager(downloadId: Long){
         val query = DownloadManager.Query().setFilterById(downloadId)
         val cursor = mDownloadManager.query(query)
         if (cursor.moveToFirst()) {
@@ -88,9 +82,12 @@ class DetailActivity : AppCompatActivity() {
                     Timber.d("RUNNING")
                 }
                 DownloadManager.STATUS_SUCCESSFUL -> {
+                    mBinding.content.fileName.text = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_TITLE))
                     mBinding.content.status.text = getString(R.string.success)
                 }
                 DownloadManager.STATUS_FAILED -> {
+                    mBinding.content.fileName.text = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_TITLE))?:getString(
+                                            R.string.error_placeholder)
                     mBinding.content.status.text = getString(R.string.failed)
                     mBinding.content.status.setTextColor(ContextCompat.getColor(this,R.color.colorRed))
                 }

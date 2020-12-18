@@ -21,7 +21,7 @@
     <string name="please_select_a_repo">Please select a repository first to download</string>
     <string name="ok">OK</string>
     <string name="status_label">Status:</string>
-    <string name="file_name_label">FiLe Name:</string>
+    <string name="file_name_label">File Name:</string>
     <string name="download">Download</string>
     <string name="no_app_to_display">No handler for this type of file.</string>
     <string name="view_download">View download</string>
@@ -30,4 +30,5 @@
     <string name="custom_url_to_download">Custom url to download</string>
     <string name="use_other_url">Use url from the editText below</string>
     <string name="url_is_not_valid">%s Url is not valid, please type another</string>
+    <string name="error_placeholder">Error</string>
 </resources>
