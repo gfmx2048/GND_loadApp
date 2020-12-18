@@ -121,7 +121,7 @@ class LoadingButton @JvmOverloads constructor(
 
     override fun performClick(): Boolean {
         if(buttonState == ButtonState.Loading) {
-            Timber.d("Button is loading, let the animation finish to handle the click")
+            Timber.d("Button is loading, let the animation finish before handle the click")
             return true
         }
         super.performClick()
@@ -189,10 +189,6 @@ class LoadingButton @JvmOverloads constructor(
 
     fun setState(state: ButtonState) {
         buttonState = state
-    }
-
-    fun updateProgress(progress: Int){
-        Timber.d("Progress $progress")
     }
 
 }

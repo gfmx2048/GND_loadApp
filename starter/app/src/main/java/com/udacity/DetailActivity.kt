@@ -20,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         val toolbar = mBinding.toolbar
         setSupportActionBar(toolbar)
         mDownloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
